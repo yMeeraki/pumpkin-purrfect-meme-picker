@@ -1,10 +1,16 @@
 import { catsData } from "./data.js";
 
+const emotionRadios = document.getElementById("emotion-radios");
+
+emotionRadios.addEventListener("change", function (e) {
+  console.log(e.target.id);
+});
+
 function getEmotionsArray(cats) {
   const emotionsArray = [];
   for (let cat of cats) {
     for (let emotion of cat.emotionTags) {
-      if(!(emotionsArray.includes(emotion))){
+      if (!emotionsArray.includes(emotion)) {
         emotionsArray.push(emotion);
       }
     }
@@ -26,7 +32,7 @@ function renderEmotionsRadios(cats) {
     >
     </div>`;
   }
-  document.getElementById("emotion-radios").innerHTML = emotionContent;
+  emotionRadios.innerHTML = emotionContent;
 }
 
 renderEmotionsRadios(catsData);
