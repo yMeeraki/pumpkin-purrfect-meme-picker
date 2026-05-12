@@ -1,7 +1,9 @@
 import { catsData } from "./data.js";
 
 const emotionRadios = document.getElementById("emotion-radios");
+const getImageBtn = document.getElementById("get-image-btn");
 
+getImageBtn.addEventListener("click", getMatchingCatsArray);
 emotionRadios.addEventListener("change", highlightCheckedOption);
 
 function highlightCheckedOption(e) {
@@ -10,6 +12,15 @@ function highlightCheckedOption(e) {
     emotion.classList.remove("highlight");
   }
   document.getElementById(e.target.id).parentElement.classList.add("highlight");
+}
+
+function getMatchingCatsArray() {
+  const selectedEmotion = document.querySelector('input[type="radio"]:checked');
+  if (selectedEmotion) {
+    console.log(selectedEmotion.value);
+  } else {
+    console.log("Please select a radio");
+  }
 }
 
 function getEmotionsArray(cats) {
