@@ -4,15 +4,36 @@ const emotionRadios = document.getElementById("emotion-radios");
 const getImageBtn = document.getElementById("get-image-btn");
 const gifsOnlyOption = document.getElementById("gifs-only-option");
 
-getImageBtn.addEventListener("click", renderCat);
-emotionRadios.addEventListener("change", highlightCheckedOption);
+const memeModalInner = document.getElementById("meme-modal-inner");
+const memeModal = document.getElementById("meme-modal");
+const memeModalCloseBtn = document.getElementById("meme-modal-close-btn");
 
-function highlightCheckedOption(e) {
-  const radioArray = document.getElementsByClassName("radio");
-  for (let emotion of radioArray) {
-    emotion.classList.remove("highlight");
+emotionRadios.addEventListener("change", highlightCheckedOption);
+memeModalCloseBtn.addEventListener("click", function () {
+  memeModal.style.display = "none";
+});
+getImageBtn.addEventListener("click", renderCat);
+
+function renderCat() {
+  const catObject = getSingleCatObject();
+
+  memeModalInner.innerHTML = `<img 
+        class="cat-img" 
+        src="./images/${catObject.image}"
+        alt="${catObject.alt}"
+        >`;
+  memeModal.style.display = "flex";
+}
+
+function getSingleCatObject() {
+  const catsArray = getMatchingCatsArray();
+
+  if (catsArray.length === 1) {
+    return catsArray[0];
+  } else {
+    const randomIndex = Math.floor(Math.random() * catsArray.length);
+    return catsArray[randomIndex];
   }
-  document.getElementById(e.target.id).parentElement.classList.add("highlight");
 }
 
 function getMatchingCatsArray() {
@@ -46,19 +67,12 @@ function getMatchingCatsArray() {
   }
 }
 
-function getSingleCatObject() {
-  const catsArray = getMatchingCatsArray();
-
-  if (catsArray.length === 1) {
-    console.log(catsArray[0]);
-  } else {
-    const randomIndex = Math.floor(Math.random() * catsArray.length);
-    console.log(randomIndex);
+function highlightCheckedOption(e) {
+  const radioArray = document.getElementsByClassName("radio");
+  for (let emotion of radioArray) {
+    emotion.classList.remove("highlight");
   }
-}
-
-function renderCat() {
-  getSingleCatObject();
+  document.getElementById(e.target.id).parentElement.classList.add("highlight");
 }
 
 function getEmotionsArray(cats) {
