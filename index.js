@@ -16,10 +16,25 @@ function highlightCheckedOption(e) {
 
 function getMatchingCatsArray() {
   const selectedEmotion = document.querySelector('input[type="radio"]:checked');
+  const isGif = document.getElementById("gifs-only-option").checked;
+
   if (selectedEmotion) {
     console.log(selectedEmotion.value);
   } else {
     console.log("Please select a radio");
+  }
+
+  if (document.querySelector('input[type="radio"]:checked')) {
+    const selectedEmotion = document.querySelector(
+      'input[type="radio"]:checked',
+    ).value;
+    console.log(selectedEmotion);
+  }
+
+  if (isGif) {
+    console.log(isGif);
+  } else {
+    console.log(isGif);
   }
 }
 
